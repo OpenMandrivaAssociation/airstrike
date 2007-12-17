@@ -19,7 +19,6 @@ Patch1:		airstrike-pre6a-optflags.patch.bz2
 Patch2:		airstrike-pre6a-fix-path-to-data.patch.bz2
 URL:		http://icculus.org/airstrike/
 BuildRequires:	SDL-devel SDL_mixer-devel SDL_image-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Airstrike is a 0-2 players 2d dogfight game in the tradition of the 
