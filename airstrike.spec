@@ -1,7 +1,7 @@
 %define name	airstrike
 %define version 1.0
 %define	pre	pre6a
-%define release 1.%{pre}.3
+%define release 1.%{pre}.4
 %define	Summary	Incredibly addictive 2D dogfight game
 
 Summary:	%{Summary}
