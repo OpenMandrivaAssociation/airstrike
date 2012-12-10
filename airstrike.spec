@@ -1,25 +1,22 @@
-%define name	airstrike
-%define version 1.0
 %define	pre	pre6a
-%define release 1.%{pre}.7
-%define	Summary	Incredibly addictive 2D dogfight game
 
-Summary:	%{Summary}
-Name:		%{name}
-Version:	%{version}
-Release:	%mkrel %{release}
+Summary:	Incredibly addictive 2D dogfight game
+Name:		airstrike
+Version:	1.0
+Release:	1.%{pre}.8
 License:	GPL
 Group:		Games/Arcade
+URL:		http://icculus.org/airstrike/
 Source0:	%{name}-%{pre}-src.tar.gz
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
 Source13:	%{name}-48x48.png
-Patch0:		airstrike-pre6a-config.patch.bz2
-Patch1:		airstrike-pre6a-optflags.patch.bz2
-Patch2:		airstrike-pre6a-fix-path-to-data.patch.bz2
-URL:		http://icculus.org/airstrike/
-BuildRequires:	SDL-devel SDL_mixer-devel SDL_image-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+Patch0:		airstrike-pre6a-config.patch
+Patch1:		airstrike-pre6a-optflags.patch
+Patch2:		airstrike-pre6a-linkage.patch
+BuildRequires:	SDL-devel
+BuildRequires:	SDL_mixer-devel
+BuildRequires:	SDL_image-devel
 
 %description
 Airstrike is a 0-2 players 2d dogfight game in the tradition of the 
@@ -31,10 +28,10 @@ such as povray made graphics and incredible gameplay.
 %setup -q -n %{name}-%{pre}-src
 %patch0 -p1 -b .config
 %patch1 -p1 -b .optflags
-#%patch2 -p1 -b .path
+%patch2 -p1 -b .linkage
 
 %build
-%make OPTFLAGS="$RPM_OPT_FLAGS" airstrike-sound
+%make OPTFLAGS="%{optflags}" airstrike-sound
 
 %install
 rm -rf %{buildroot}
@@ -57,12 +54,11 @@ cp -r data  %{buildroot}%{_gamesdatadir}/%{name}
 install -m644 doc/airstrike.6 -D %{buildroot}%{_mandir}/man6/airstrike.6 
 
 #Menu items
-
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=AirStrike
-Comment=%{Summary}
+Comment=Incredibly addictive 2D dogfight game
 Exec=%{_gamesbindir}/%{name}
 Icon=%{name}
 Terminal=false
@@ -75,21 +71,7 @@ install -m644 %{SOURCE11} -D %{buildroot}%{_miconsdir}/%{name}.png
 install -m644 %{SOURCE12} -D %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 %{SOURCE13} -D %{buildroot}%{_liconsdir}/%{name}.png
 
-%if %mdkversion < 200900
-%post
-%update_menus
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%clean
-rm -rf %{buildroot}
-
-%files 
-%defattr(-,root,root)
+%files
 %doc ChangeLog README doc
 %{_gamesbindir}/*
 %dir %{_gamesdatadir}/%{name}
@@ -99,4 +81,5 @@ rm -rf %{buildroot}
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
+
 

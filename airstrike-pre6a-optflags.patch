@@ -1,0 +1,10 @@
+--- airstrike-pre6a-src/src/Makefile.orig	2005-08-30 20:34:50.000000000 +0200
++++ airstrike-pre6a-src/src/Makefile	2005-08-30 20:37:55.000000000 +0200
+@@ -1,4 +1,6 @@
+-CFLAGS:= -g -O2 -Wall -Wno-unused $(OPTIONS)
++OPTFLAGS = -g -O2 -Wall -Wno-unused
++CFLAGS:= $(OPTFLAGS) $(OPTIONS)
++
+ #
+ CFLAGS += $(shell sdl-config --cflags) -Isprite -I. -Isupport -DINLINE=inline
+ CFILES:= $(shell find . -name '*.c')

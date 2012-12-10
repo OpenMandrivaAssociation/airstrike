@@ -1,0 +1,12 @@
+diff -urN airstrike-pre6a-src/src/Makefile airstrike-pre6a-src-patched/src/Makefile
+--- airstrike-pre6a-src/src/Makefile	2003-01-19 06:02:32.000000000 +1000
++++ airstrike-pre6a-src-patched/src/Makefile	2012-11-16 17:09:49.650207660 +1100
+@@ -8,7 +8,7 @@
+ 	$(CC) -o $@ $(CFLAGS) $(OBJECTS) `sdl-config --libs` -lSDL_image
+ 
+ airstrike-sound: $(OBJECTS)
+-	$(CC) -o $@ $(CFLAGS) $(OBJECTS) `sdl-config --libs` -lSDL_image -lSDL_mixer
++	$(CC) -o $@ $(CFLAGS) $(OBJECTS) `sdl-config --libs` -lSDL_image -lSDL_mixer -lm
+ 
+ # Use the rule below when coding new sprite types
+ #sprites_autogen.h: sprite_types/*.c
