@@ -14,9 +14,9 @@ Source13:	%{name}-48x48.png
 Patch0:		airstrike-pre6a-config.patch
 Patch1:		airstrike-pre6a-optflags.patch
 Patch2:		airstrike-pre6a-linkage.patch
-BuildRequires:	SDL-devel
-BuildRequires:	SDL_mixer-devel
-BuildRequires:	SDL_image-devel
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(SDL_mixer)
+BuildRequires:	pkgconfig(SDL_image)
 
 %description
 Airstrike is a 0-2 players 2d dogfight game in the tradition of the 
@@ -34,7 +34,6 @@ such as povray made graphics and incredible gameplay.
 %make OPTFLAGS="%{optflags}" airstrike-sound
 
 %install
-rm -rf %{buildroot}
 install -m755 airstrike -D %{buildroot}%{_gamesbindir}/airstrike.bin
 
 # Launch script
