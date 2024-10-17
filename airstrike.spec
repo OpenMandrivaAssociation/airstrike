@@ -6,7 +6,7 @@ Version:	1.0
 Release:	1.%{pre}.8
 License:	GPL
 Group:		Games/Arcade
-URL:		http://icculus.org/airstrike/
+URL:		https://icculus.org/airstrike/
 Source0:	%{name}-%{pre}-src.tar.gz
 Source11:	%{name}-16x16.png
 Source12:	%{name}-32x32.png
